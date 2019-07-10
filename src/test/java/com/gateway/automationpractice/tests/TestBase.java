@@ -51,7 +51,10 @@ public class TestBase {
         switch ("chrome") {
             case "chrome":
                 System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
-                driver = new ChromeDriver();
+                ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--headless");
+                chromeOptions.addArguments("--no-sandbox");
+                driver = new ChromeDriver(chromeOptions);
                 Log.debug("Running chrome");
                 break;
             case "firefox":
