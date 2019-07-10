@@ -50,12 +50,12 @@ public class TestBase {
     private void setBrowser(String browserType) {
         switch ("chrome") {
             case "chrome":
-                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/chromedriver");
                 driver = new ChromeDriver();
                 Log.debug("Running chrome");
                 break;
             case "firefox":
-                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\src\\main\\resources\\geckodriver.exe");
+                System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "/src/main/resources/geckodriver");
                 driver = new FirefoxDriver();
                 Log.debug("Running firefox");
 
