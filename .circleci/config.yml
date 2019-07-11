@@ -1,9 +1,15 @@
 version: 2
+workflows:
+  main:
+    jobs:
+      - build
+
 jobs:
   build:
-    docker:
-      - image: circleci/openjdk:11.0.1-jdk
-
+    machine:
+      image: ubuntu-1604:201903-01
+      docker_layer_caching: true 
+    
     working_directory: ~/MavenAutomation
     
     steps:
