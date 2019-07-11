@@ -1,16 +1,23 @@
-version: 2.1
-workflows:
-  main:
-    jobs:
-      - build
-
+version: 2
 jobs:
   build:
     machine:
-      image: ubuntu-1604:201903-01
-      docker_layer_caching: true 
-    
+      reusable: true
     working_directory: ~/MavenAutomation
+    steps:
+      - run: echo doing nothing.
+
+  ###########################
+  #### ubuntu-14.04-XXL #####
+  ###########################
+  ubuntu-14.04-XXL:
+    machine:
+      reusable: true
+    working_directory: ~/MavenAutomation
+    environment:
+      IMAGE_REPO: circleci/build-image
+      TARGET: ubuntu-14.04-XXL
+      _TARGET: ubuntu-14_04-XXL
     
     steps:
       # git pull
