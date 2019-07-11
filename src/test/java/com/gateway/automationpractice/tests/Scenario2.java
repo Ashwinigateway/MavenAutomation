@@ -11,7 +11,7 @@ public class Scenario2 extends TestBase {
 
     @BeforeMethod
     public void navigateToURL() {
-        getUrl(CONFIG.getProperty("url2"));
+        getUrl(CONFIG.getProperty("url1"));
     }
 
 
