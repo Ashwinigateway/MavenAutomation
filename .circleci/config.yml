@@ -1,23 +1,10 @@
 version: 2
 jobs:
   build:
-    machine:
-      reusable: true
-    working_directory: ~/MavenAutomation
-    steps:
-      - run: echo doing nothing.
+    docker:
+      - image: circleci/openjdk:11.0.1-jdk
 
-  ###########################
-  #### ubuntu-14.04-XXL #####
-  ###########################
-  ubuntu-14.04-XXL:
-    machine:
-      reusable: true
-    working_directory: ~/MavenAutomation
-    environment:
-      IMAGE_REPO: circleci/build-image
-      TARGET: ubuntu-14.04-XXL
-      _TARGET: ubuntu-14_04-XXL
+    working_directory: ~/AutomationPracticeGateWayProject
     
     steps:
       # git pull
@@ -30,22 +17,22 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - MavenAutomation-{{ checksum "pom.xml" }}
+          - AutomationPracticeGateWayProject-{{ checksum "pom.xml" }}
 
       - run: mvn dependency:go-offline
 
       - save_cache:
           paths:
             - ~/.m2
-          key: MavenAutomation-{{ checksum "pom.xml" }}
+          key: AutomationPracticeGateWayProject-{{ checksum "pom.xml" }}
         
       # package into a jar
       - run: mvn clean package
 
       # build and push docker image to docker hub
-      - run: mvn clean compile jib:build -Dimage=Ashwinigateway/MavenAutomation:$CIRCLE_BUILD_NUM
+      - run: mvn clean compile jib:build -Dimage=Ashwinigateway/sampledemo:$CIRCLE_BUILD_NUM
 
       # store raw contents of src code
       - store_artifacts:
           path: target/classes
-          destination: MavenAutomation
+          destination: AutomationPracticeGateWayProject
